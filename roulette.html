@@ -1,0 +1,22 @@
+<meta charset="utf-8">
+<script>
+
+var n = 0;
+do {
+	if ((Math.random() * 6) < 1) {
+		alert('пипец');
+		break;
+	}
+	var a = prompt("Для продолжения введи 1, чтобы закончить введи что-то иное");
+	if (a == 1) {
+		n++;
+	}
+	else{
+		break;
+	}
+
+} while (true)
+
+alert('Сыграно раундов: ' + n);
+
+</script>
