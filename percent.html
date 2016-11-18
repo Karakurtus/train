@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+<script>
+
+	var s = parseInt(prompt("Сумма вклада, руб: "));
+	var p = parseInt(prompt("Годовой процент, %: "));
+	var g = parseInt(prompt("Срок вклада, лет: "));
+	var a;
+
+	for (a=1; a<=g; a++) {
+		s=s+s/100*p;
+		alert("Прошло, лет: " + a + " Сумма вклада, руб: " + s);
+	}
+
+</script>
