@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<script>
+	var arr = [];
+	var r = 1000000; 	// раунды
+	var z = 0; 			// кол-во элементов массива
+	var z_max = 0;		// максимальное количество элементов массива
+	var i; 				// счетчик
+
+	for (i = 0; i <= r; i++) {
+		arr.push(Math.round(Math.random()*2)-1);
+	}
+
+	alert(arr);
+
+	for (i = 0; i < arr.length; i++) {
+		if (arr[i] == 1) {
+			z++;
+		}
+
+		else {
+
+			if (z > z_max) {
+				z_max = z;
+			}
+
+			z = 0;
+		}
+	}
+
+	alert("Максимально красное выпало " + z_max + " раз подряд");
+
+</script>
