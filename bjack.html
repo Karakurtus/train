@@ -1,0 +1,98 @@
+<meta charset="utf-8">
+<script>
+
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function getCard() {
+		var cards = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+		return cards[getRandomInt(0, cards.length - 1)];
+	}
+
+	function getSum(hand) {
+		var sum = 0;
+
+		//считаем карты без тузов
+		for (var i=0; i<hand.length; i++) {
+			var card = hand[i];
+			if (card != 'A') {
+				if (card == 'J' || card == 'Q' || card == 'K') {
+					sum = sum + 10;
+				} 
+				else {
+					sum = sum + parseInt(card);
+				}
+			}
+		}
+
+		// туз = 1, если сумма больше 10, иначе туз = 11
+		for (var i=0; i<hand.length; i++) {
+			var card = hand[i];
+			if (card == 'A') {
+				if (sum > 10) {
+					sum = sum + 1;
+				}
+				else {
+					sum = sum + 11;
+				}
+			}
+		}
+
+		return sum;
+	}
+
+	function getStatus() {
+		return 'Дилер: ' + dealer.join(' ') + ' Игрок: ' + player.join(' ');
+	}
+
+	var dealer = [getCard()];
+	var player = [getCard(), getCard()];
+
+	if (getSum(player) == 21) {
+		alert('Black Jack на раздаче! $_$');
+	}
+	else {
+			var answer = '';
+		do {
+			answer = prompt(getStatus() + ' Хотите еще карту? 1 - да, 0 - нет');
+
+			if (answer == '1') {
+				player.push(getCard());
+
+				//проверка перебора или выигрыша
+				if (getSum(player) > 21) {
+					alert('Перебор T_T' + getStatus());
+					break;
+				}
+				else if (getSum(player) == 21) {
+					alert('Black Jack! :P' + getStatus());
+					break;
+				}
+			}
+			else {
+				//карты берет дилер
+				while (getSum(dealer) < 17) {
+					dealer.push(getCard());
+				};
+
+				//Проверка результата игры
+				if (getSum(dealer) == 21) {
+					alert('У дилера Black Jack! T_T ' + getStatus());
+				}
+				else if (getSum(dealer) > 21) {
+					alert('У дилера перебор! ]:-> ' + getStatus());
+				}
+				else if (getSum(player) == getSum(dealer)) {
+					alert('Ничья! o_O ' + getStatus());
+				}
+				else if (getSum(player) > getSum(dealer)) {
+					alert('Выигрыш! :) ' + getStatus());
+				}
+				else {
+					alert('Проигрыш :(' + getStatus());
+				}
+			}
+		} while(answer == '1');
+	}
+</script>
